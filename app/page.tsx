@@ -1,36 +1,133 @@
 "use client";
 
-const tildaRows = [
-  { number: "01", title: "Маркетинговая база, прототип и тексты", price: "24 000 ₽", items: ["Интервью с отделом продаж и сбор критериев выбора", "Экспресс-анализ конкурентов и существующего пути клиента", "Структура сайта, сценарии заявок и продающий прототип", "Тексты для главной, категорий, кейсов и заявочных блоков"] },
-  { number: "02", title: "UX/UI-дизайн — desktop + mobile", price: "60 000 ₽", items: ["Визуальная концепция промышленного B2B-сайта", "Главная, каталог, категория, карточка решения и кейсы", "Сценарий «Получить расчёт под мою задачу»", "Система карточек, таблиц характеристик, кнопок и форм", "Полноценная адаптация ключевых экранов под мобильные устройства"] },
-  { number: "03", title: "Реализация на Tilda", price: "71 000 ₽", items: ["Сборка утверждённого дизайна и адаптивной версии", "До 5 категорий каталога и единый шаблон товарной карточки", "Разделы: роботизированные решения, применение, кейсы, контакты", "Формы запроса КП, подбора робота и расчёта роботизированной ячейки", "Навигация, базовые анимации и подготовка к самостоятельному ведению"] },
-  { number: "04", title: "Техническая настройка и запуск", price: "5 000 ₽", items: ["Домен, SSL, аналитика и цели", "Настройка отправки заявок в e-mail / Telegram / CRM при наличии доступа", "Базовое SEO: метатеги, ЧПУ, sitemap, robots и страница 404", "Размещение политики конфиденциальности, согласия и условий из материалов клиента", "Финальная проверка перед публикацией"] },
+import { useState } from "react";
+
+type EstimateRow = { number: string; title: string; price: string; items: string[] };
+
+const commonMarketing = [
+  "Установочная встреча с отделом продаж",
+  "Разбор текущего пути клиента и точек потери заявок",
+  "Экспресс-анализ конкурентов и отраслевых сайтов",
+  "Карта ключевых сценариев: реклама, поиск, прямой переход",
+  "Стартовая стратегия под платный трафик и SEO",
+  "Структура сайта и карта посадочных страниц",
+  "Прототип ключевых страниц и сценариев заявок",
+  "Тексты для главной, разделов и заявочных блоков",
 ];
 
-const wpRows = [
-  ["01", "Маркетинговая база, прототип и тексты", "24 000 ₽"],
-  ["02", "UX/UI-дизайн — desktop + mobile", "60 000 ₽"],
-  ["03", "Адаптивная HTML/CSS/JS-вёрстка", "50 000 ₽"],
-  ["04", "WordPress: кастомная тема, админ-панель, каталог, кейсы и формы", "80 000 ₽"],
-  ["05", "Технический запуск: хостинг, защита, резервные копии, аналитика и SEO-база", "16 000 ₽"],
+const designItems = [
+  "Визуальная концепция промышленного B2B-сайта",
+  "Дизайн главной страницы",
+  "Дизайн каталога и страницы категории",
+  "Дизайн карточки оборудования и роботизированной ячейки",
+  "Дизайн раздела готовых решений и применения",
+  "Дизайн страницы реализованного кейса",
+  "Формы «Получить расчёт», «Подобрать решение», «Запросить КП»",
+  "Система карточек, таблиц характеристик, кнопок и статусов",
+  "Интерактивный прототип ключевых сценариев",
+  "Полная адаптация макетов для мобильных устройств",
+];
+
+const tildaRows: EstimateRow[] = [
+  { number: "01", title: "Маркетинговая база, прототип и тексты", price: "24 000 ₽", items: commonMarketing },
+  { number: "02", title: "UX/UI-дизайн — desktop + mobile", price: "60 000 ₽", items: designItems },
+  { number: "03", title: "Реализация сайта на Tilda", price: "71 000 ₽", items: [
+    "Сборка утверждённого дизайна в Tilda",
+    "Адаптивная версия для desktop, tablet и mobile",
+    "Создание до 5 категорий каталога",
+    "Шаблон карточки товара / роботизированной ячейки",
+    "Разделы: каталог, решения, применение, кейсы, блог, контакты",
+    "Настройка заявочных форм и выбора нужного сценария",
+    "Блоки отсылки к другим направлениям MAYTEC и Kontrust",
+    "Базовые анимации и интерактивные элементы",
+    "Подготовка административной логики для добавления товаров и статей",
+    "Тестирование отображения и пользовательских сценариев",
+  ] },
+  { number: "04", title: "Техническая настройка и запуск", price: "5 000 ₽", items: [
+    "Подключение домена",
+    "Настройка SSL-сертификата",
+    "Подключение форм к e-mail / Telegram / CRM при наличии доступа",
+    "Подключение Яндекс Метрики и целей",
+    "Базовые SEO-настройки: Title, Description, H1 и ЧПУ",
+    "Настройка sitemap.xml, robots.txt и страницы 404",
+    "Базовые 301-редиректы при необходимости",
+    "Размещение политики конфиденциальности и согласия на обработку данных",
+    "Размещение условий работы / оферты из материалов клиента",
+    "Финальная проверка перед публикацией",
+  ] },
+];
+
+const wpRows: EstimateRow[] = [
+  { number: "01", title: "Маркетинговая база, прототип и тексты", price: "24 000 ₽", items: commonMarketing },
+  { number: "02", title: "UX/UI-дизайн — desktop + mobile", price: "60 000 ₽", items: designItems },
+  { number: "03", title: "Frontend-разработка", price: "50 000 ₽", items: [
+    "Адаптивная HTML/CSS/JS-вёрстка утверждённого дизайна",
+    "Главная страница и ключевые внутренние шаблоны",
+    "Каталог, категория, карточка оборудования и решения",
+    "Страница кейса и шаблон блога",
+    "Формы и сценарии отправки заявок",
+    "Адаптация под мобильные устройства",
+    "Интерактивные состояния и базовые анимации",
+    "Кроссбраузерная проверка интерфейса",
+  ] },
+  { number: "04", title: "Разработка на WordPress", price: "80 000 ₽", items: [
+    "Установка и настройка WordPress",
+    "Разработка кастомной темы",
+    "Административная часть для самостоятельного ведения сайта",
+    "Типы контента: товары, решения, кейсы, статьи",
+    "Категории, характеристики и шаблоны товарных карточек",
+    "Настройка каталога и задел для сложной фильтрации",
+    "Шаблон и административная логика для блога",
+    "Формы заявок и интеграции при наличии доступа",
+    "Базовая защита и резервное копирование",
+    "Тестирование админ-панели и пользовательских сценариев",
+  ] },
+  { number: "05", title: "Техническая настройка и запуск", price: "16 000 ₽", items: [
+    "Подбор и подключение хостинга",
+    "Подключение домена и SSL-сертификата",
+    "Подключение аналитики и целей",
+    "Настройка приёма заявок",
+    "Базовое SEO: метатеги, ЧПУ, sitemap, robots",
+    "Настройка страницы 404 и редиректов",
+    "Настройка резервного копирования",
+    "Размещение юридических страниц из материалов клиента",
+    "Финальная проверка перед публикацией",
+  ] },
+];
+
+const tasks = [
+  ["01", "Проработать структуру для трафика ЯД и SEO", "Интуитивно понятная структура, основанная на ключевых запросах и критериях выбора целевой аудитории, чтобы человек быстрее дошёл до заявки."],
+  ["02", "Проводить к подходящему решению", "Каталог, кейсы и комплексные решения помогают инженеру или руководителю сопоставить свою задачу с опытом MAYTEC."],
+  ["03", "Давать менеджеру контекст", "Заявка собирает ключевые вводные по производству и выбранному решению, чтобы разговор начинался предметно."],
+  ["04", "Раскрывать потенциал MAYTEC", "На релевантных страницах посетитель знакомится с другими компетенциями компании и направлением Kontrust."],
 ];
 
 export default function Home() {
+  const [platform, setPlatform] = useState<"tilda" | "wordpress">("tilda");
+  const rows = platform === "tilda" ? tildaRows : wpRows;
+  const total = platform === "tilda" ? "160 000 ₽" : "230 000 ₽";
+
   return <main>
     <header className="topbar"><a className="brand" href="#top">ELIANORA / DIGITAL</a><span className="topbar-label">Коммерческое предложение · 2026</span><a className="topbar-link" href="#estimate">Смета ↓</a></header>
+
     <section className="hero" id="top">
       <div className="hero-index">01 / 08</div><p className="eyebrow">Для MAYTEC</p>
       <h1>Сайт для<br />промышленной<br /><i>роботизации.</i></h1>
       <div className="hero-bottom"><p>Каталог оборудования, роботизированные решения, выполненные кейсы и заявки на расчёт — в одном сильном B2B-сайте.</p><a href="#brief" className="button button-inverse">Смотреть предложение <span>↘</span></a></div>
-      <div className="hero-rule" /><div className="hero-statement">Не интернет-магазин. Инструмент для продажи сложных инженерных решений.</div>
+      <div className="hero-rule" /><div className="hero-statement">Роботы, ячейки, решения для производственных задач.</div>
     </section>
-    <section className="section brief" id="brief"><p className="section-number">02 / Задача</p><div className="section-content split-headline"><h2>Не объединять<br />всё подряд.</h2><div className="large-copy"><p>Новый сайт нужен не для всех направлений MAYTEC, а именно для роботизации: промышленной автоматизации, роботов, ячеек и периферийного оборудования.</p><p>Металлоконструкции остаются самостоятельным направлением. На новом сайте — только спокойная отсылка: <a href="https://www.konstrust.pro/" target="_blank" rel="noreferrer">«Нужны металлоконструкции? Перейти на Kontrust ↗»</a>.</p></div></div></section>
-    <section className="section architecture"><p className="section-number">03 / Логика сайта</p><div className="architecture-title"><h2>Структура, которая<br />ведёт к заявке.</h2><p>Берём полезную логику отраслевых сайтов: отдельно каталог, готовые комплексы, применение и реализованные проекты. Не копируем референс — строим собственную систему под MAYTEC.</p></div><div className="route-grid"><article><b>01</b><h3>Главная</h3><p>Ключевые компетенции, доверие, отрасли, быстрый вход в каталог и комплексные решения.</p></article><article><b>02</b><h3>Каталог</h3><p>До 5 категорий: роботы, ячейки, позиционеры, периферия и другое оборудование.</p></article><article><b>03</b><h3>Решения</h3><p>Сварка, паллетирование, обслуживание станков и другие типовые задачи производства.</p></article><article><b>04</b><h3>Кейсы</h3><p>Реализованные проекты с задачей, составом решения, фото и призывом обсудить аналогичную задачу.</p></article><article><b>05</b><h3>Заявка</h3><p>«Получить расчёт», «Подобрать робота», «Запросить КП» — из каждого сценария.</p></article></div></section>
-    <section className="section platform"><p className="section-number">04 / Платформа</p><div className="platform-grid"><div className="platform-intro"><h2>Две реализации.<br />Одна цель.</h2><p>На старте каталог до 50 позиций и заявки без онлайн-оплаты можно качественно реализовать на обеих платформах.</p></div><article className="platform-card dark"><p className="eyebrow">Рекомендуем на старте</p><h3>Tilda</h3><p>Быстрый запуск, понятное самостоятельное обновление, каталог и SEO-база без лишней технической нагрузки.</p><strong>от 160 000 ₽</strong></article><article className="platform-card"><p className="eyebrow">Если нужен рост логики</p><h3>WordPress</h3><p>Для сложной фильтрации, развития каталога, нестандартных интеграций и более гибкой административной части.</p><strong>от 230 000 ₽</strong></article></div><p className="platform-note">SEO зависит от структуры, качества контента и регулярного развития сайта — не от названия платформы. WordPress даёт больше свободы, но не автоматический рост позиций.</p></section>
-    <section className="section estimate" id="estimate"><div className="estimate-head"><p className="section-number">05 / Подробная смета</p><div><p className="eyebrow">Вариант А</p><h2>Разработка на Tilda</h2></div><div className="estimate-total"><span>Итого</span><strong>160 000 ₽</strong></div></div><div className="estimate-table">{tildaRows.map((row) => <article className="estimate-row" key={row.number}><div className="row-number">{row.number}</div><div className="row-main"><h3>{row.title}</h3><ul>{row.items.map((item) => <li key={item}>{item}</li>)}</ul></div><div className="row-price">{row.price}</div></article>)}</div></section>
-    <section className="section wp-estimate"><div className="estimate-head"><p className="section-number">06 / Альтернатива</p><div><p className="eyebrow">Вариант B</p><h2>Разработка на WordPress</h2></div><div className="estimate-total"><span>Итого</span><strong>230 000 ₽</strong></div></div><div className="wp-list">{wpRows.map(([num, title, price]) => <div className="wp-row" key={num}><span>{num}</span><p>{title}</p><b>{price}</b></div>)}</div><p className="fine-print">WordPress требует отдельного хостинга, регулярных обновлений и резервного копирования. После запуска техническую поддержку можно подключать по необходимости.</p></section>
-    <section className="section catalog"><p className="section-number">07 / Наполнение каталога</p><div className="catalog-head"><h2>Товары —<br />отдельно от<br />разработки.</h2><p>В базовую стоимость не входит внесение товарных карточек. Можно выбрать ручную работу или загрузку подготовленного массива.</p></div><div className="catalog-grid"><article><p className="eyebrow">Вариант 01</p><h3>Импорт таблицей</h3><strong>от 300 ₽ <small>/ карточка</small></strong><p>Минимальная стоимость — 10 000 ₽. Подходит, если данные готовы в едином шаблоне.</p></article><article className="dark"><p className="eyebrow">Вариант 02</p><h3>Ручное внесение</h3><strong>от 800 ₽ <small>/ карточка</small></strong><p>Название, категория, фото, характеристики, описание, цена / «по запросу» и базовые SEO-поля.</p></article></div><div className="import-rule"><b>Чтобы импорт состоялся:</b><span>одна строка — один товар · согласованные категории · артикулы/ID · описание и характеристики · прямые ссылки на фото · цены или статус «по запросу» · SEO-поля при необходимости</span></div></section>
-    <section className="section final"><p className="section-number">08 / Следующий шаг</p><h2>Фиксируем<br />первый релиз.</h2><div className="final-grid"><p>После выбора платформы проводим установочную встречу с отделом продаж. На ней фиксируем каталог, список ключевых страниц, приоритетные решения и материалы для кейсов.</p><p>Юридические тексты — политика конфиденциальности, согласие на обработку данных и условия работы — размещаются на сайте после предоставления и утверждения со стороны клиента.</p></div><div className="about"><div className="about-mark">EM</div><div><p className="eyebrow">Исполнитель</p><h3>Элионора Муллагалиева</h3><p>Стратегия, структура, контент, UX/UI-дизайн и сопровождение разработки в одном проекте.</p></div><a className="button" href="#top">Вернуться наверх <span>↑</span></a></div></section>
+
+    <section className="section brief" id="brief"><p className="section-number">02 / Ключевые задачи</p><div className="brief-intro"><h2>Проработать путь<br />от первого запроса<br />к предметному расчёту.</h2><p>Сайт связывает рекламу, поисковую выдачу, каталог, кейсы и работу отдела продаж в понятный маршрут для будущего клиента.</p></div><div className="task-grid">{tasks.map(([number, title, text]) => <article key={number}><b>{number}</b><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+
+    <section className="section architecture"><p className="section-number">03 / Логика сайта</p><div className="architecture-title"><h2>Структура, которая<br />ведёт к заявке.</h2><p>Отдельно показываем каталог, готовые комплексы, применение и реализованные проекты. Все разделы строятся вокруг понятного действия: подобрать решение, запросить расчёт или обсудить задачу.</p></div><div className="route-grid"><article><b>01</b><h3>Главная</h3><p>Компетенции, отрасли, доверие и быстрый вход в нужный сценарий.</p></article><article><b>02</b><h3>Каталог</h3><p>До 5 категорий: роботы, ячейки, позиционеры, периферия и оборудование.</p></article><article><b>03</b><h3>Решения</h3><p>Сварка, паллетирование, обслуживание станков и другие задачи производства.</p></article><article><b>04</b><h3>Кейсы</h3><p>Задача, состав решения, фото/видео, результат и следующий шаг.</p></article><article><b>05</b><h3>Блог</h3><p>Экспертиза, SEO-страницы и материалы для прогрева клиентов.</p></article></div></section>
+
+    <section className="section platform"><p className="section-number">04 / Платформа</p><div className="platform-grid"><div className="platform-intro"><h2>Две реализации.<br />Одна цель.</h2><p>Каталог до 50 позиций, блог, кейсы и заявки можно качественно реализовать на обеих платформах.</p></div><article className="platform-card dark"><p className="eyebrow">Рекомендуем на старте</p><h3>Tilda</h3><p>Быстрый запуск, понятное самостоятельное обновление, каталог и SEO-база.</p><strong>от 160 000 ₽</strong></article><article className="platform-card"><p className="eyebrow">Если нужна сложная логика</p><h3>WordPress</h3><p>Развитие каталога, сложные фильтры, интеграции и более гибкая административная часть.</p><strong>от 230 000 ₽</strong></article></div><p className="platform-note">Выбор платформы фиксируем после стартовой встречи и согласования каталога, задач менеджеров и планов по SEO.</p></section>
+
+    <section className="section estimate" id="estimate"><div className="estimate-head"><p className="section-number">05 / Подробная смета</p><div><p className="eyebrow">Выберите формат реализации</p><div className="estimate-tabs" role="tablist"><button className={platform === "tilda" ? "active" : ""} onClick={() => setPlatform("tilda")} role="tab" aria-selected={platform === "tilda"}><span>Tilda</span><b>160 000 ₽</b></button><button className={platform === "wordpress" ? "active" : ""} onClick={() => setPlatform("wordpress")} role="tab" aria-selected={platform === "wordpress"}><span>WordPress</span><b>230 000 ₽</b></button></div></div><div className="estimate-total"><span>Итого</span><strong>от {total}</strong></div></div><div className="estimate-table">{rows.map((row) => <article className="estimate-row" key={row.number}><div className="row-number">{row.number}</div><div className="row-main"><h3>{row.title}</h3><ul>{row.items.map((item) => <li key={item}>{item}</li>)}</ul></div><div className="row-price">{row.price}</div></article>)}</div><div className="bonus"><span>Бонус к проекту</span><p>Генерация визуальных материалов для ключевых блоков сайта: изображения и короткие видео-вставки в рамках утверждённой структуры.</p></div></section>
+
+    <section className="section catalog"><p className="section-number">06 / Наполнение и развитие</p><div className="catalog-head"><h2>Каталог,<br />статьи и<br />контент.</h2><p>Структура блога и шаблон статей входят в базовую разработку. Наполнение каталога и регулярная публикация материалов считаются отдельно.</p></div><div className="catalog-grid"><article><p className="eyebrow">Каталог · вариант 01</p><h3>Импорт таблицей</h3><strong>от 300 ₽ <small>/ карточка</small></strong><p>Один товар в строке, согласованные категории, характеристики и прямые ссылки на фото.</p></article><article className="dark"><p className="eyebrow">Каталог · вариант 02</p><h3>Ручное внесение</h3><strong>от 800 ₽ <small>/ карточка</small></strong><p>Название, категория, фото, характеристики, описание, цена / «по запросу» и базовые SEO-поля.</p></article></div><div className="extras"><p className="eyebrow">Дополнительные услуги</p><div className="extras-grid"><article><h3>Страница «Все направления MAYTEC»</h3><p>Объединяет роботизацию, инжиниринг, ПО, производство и Kontrust в одной брендовой странице.</p><b><span>Tilda</span> от 27 000 ₽</b><b><span>WordPress</span> от 39 000 ₽</b></article><article><h3>Публикация готовой статьи</h3><p>Оформление, изображения, SEO-поля, внутренние ссылки и публикация в блоге.</p><b>от 1 500 ₽ / статья</b></article><article><h3>SEO-статья под ключ</h3><p>Тема, структура, текст, визуалы, SEO-настройка и публикация.</p><b>от 6 500 ₽ / статья</b></article></div></div></section>
+
+    <section className="section final"><p className="section-number">07 / Следующий шаг</p><h2>Маркетинговая<br />база, прототип<br />и тексты.</h2><div className="final-grid"><p><strong>Первый этап можно запустить отдельно.</strong><br />Проводим встречу с отделом продаж, собираем критерии выбора, прорабатываем структуру под рекламу и SEO, создаём прототип и пишем ключевые тексты.</p><p><strong>Срок — до 5 рабочих дней.</strong><br />Предоплата за первый этап — 24 000 ₽. Оплата возможна на ИП; дальнейшие этапы удобно разбить на небольшие транши.</p></div><div className="about"><div className="about-mark">EM</div><div><p className="eyebrow">Исполнитель</p><h3>Элианора Муллагалиева</h3><p>Стратегия, структура, контент, UX/UI-дизайн и сопровождение разработки в одном проекте.</p></div><a className="button" href="#top">Вернуться наверх <span>↑</span></a></div></section>
     <footer><span>© 2026 · Коммерческое предложение для MAYTEC</span><a href="https://www.konstrust.pro/" target="_blank" rel="noreferrer">Металлоконструкции → Kontrust ↗</a></footer>
   </main>;
 }
